@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace HSPAuthTentativeIII.Repositories
 {
-    public class UserAuthenticationService
+    public class UserAuthenticationService : IUserAuthenticationService
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;

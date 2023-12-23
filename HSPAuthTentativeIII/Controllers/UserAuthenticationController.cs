@@ -26,7 +26,7 @@ namespace HSPAuthTentativeIII.Controllers
             var result = await _authService.LoginAsync(model);
             if (result.StatusCode == 1)
             {
-                return RedirectToAction("Display", "Dashboard");
+                return RedirectToAction("Index", "Home");
             }
             else
             {

@@ -1,4 +1,7 @@
 ﻿using HSPAuthTentativeIII.Data;
+using HSPAuthTentativeIII.Models;
+using HSPAuthTentativeIII.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +11,16 @@ var connectionString = builder.Configuration.GetConnectionString("AuthDbConnecti
 builder.Services.AddDbContext<DatabaseContext>(options =>
 options.UseSqlServer(connectionString));
 
+// For Identity  
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<DatabaseContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options => options.LoginPath = "/UserAuthentication/Login");
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IUserAuthenticationService, UserAuthenticationService>();
 
 var app = builder.Build();
 
@@ -25,11 +36,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=UserAuthentication}/{action=Login}/{id?}");
 
 app.Run();
