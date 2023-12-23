@@ -1,4 +1,12 @@
+﻿using HSPAuthTentativeIII.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Base de donn�es
+var connectionString = builder.Configuration.GetConnectionString("AuthDbConnection");
+builder.Services.AddDbContext<DatabaseContext>(options =>
+options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
