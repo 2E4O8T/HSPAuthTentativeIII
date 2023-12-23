@@ -1,4 +1,10 @@
-﻿form {
+﻿img {
+    display: block;
+    width: 25%;
+    margin:auto;
+}
+
+form {
     border: 3px solid #f1f1f1;
     width: 60%;
     margin: auto;
@@ -15,7 +21,7 @@ input[type=text], input[type=password] {
 }
 
 button {
-    background-color: #aa048b;
+    background-color: #6DAC46;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -31,7 +37,6 @@ button {
 .msg {
     padding: 0px;
 }
-
 
 .err {
     color: red;
